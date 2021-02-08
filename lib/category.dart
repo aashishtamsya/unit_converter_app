@@ -1,81 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:unit_converter_app/converter_route.dart';
 
 import 'unit.dart';
 
-final _rowHeight = 60.0;
-final _borderRadius = BorderRadius.circular(_rowHeight / 2);
-
-class Category extends StatelessWidget {
-  final name;
+class Category {
+  final String name;
   final ColorSwatch color;
-  final IconData iconLocation;
   final List<Unit> units;
+  final IconData iconLocation;
 
   const Category(
-      {Key key,
-      @required this.name,
+      {@required this.name,
       @required this.color,
-      @required this.iconLocation,
-      @required this.units})
+      @required this.units,
+      @required this.iconLocation})
       : assert(name != null),
         assert(color != null),
-        assert(iconLocation != null),
         assert(units != null),
-        super(key: key);
-
-  void _navigateToConverter(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          title: Text(
-            name,
-            style: Theme.of(context).textTheme.display1,
-          ),
-          centerTitle: true,
-          backgroundColor: color,
-        ),
-        body: ConverterRoute(units: units, color: color),
-      );
-    }));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Container(
-        height: _rowHeight,
-        child: InkWell(
-          borderRadius: _borderRadius,
-          highlightColor: color,
-          splashColor: color,
-          onTap: () => _navigateToConverter(context),
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(right: 16.0),
-                  child: Icon(
-                    iconLocation,
-                    size: _rowHeight / 2.0,
-                  ),
-                ),
-                Center(
-                    child: Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline6,
-                )),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+        assert(iconLocation != null);
 }
