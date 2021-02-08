@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final _rowHeight = 100.0;
+final _rowHeight = 60.0;
 final _borderRadius = BorderRadius.circular(_rowHeight / 2);
 
 class Category extends StatelessWidget {
@@ -40,7 +40,7 @@ class Category extends StatelessWidget {
                   padding: EdgeInsets.only(right: 16.0),
                   child: Icon(
                     iconLocation,
-                    size: 60.0,
+                    size: _rowHeight / 2.0,
                   ),
                 ),
                 Center(
