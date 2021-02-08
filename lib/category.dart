@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:unit_converter_app/converter_route.dart';
+
+import 'unit.dart';
 
 final _rowHeight = 60.0;
 final _borderRadius = BorderRadius.circular(_rowHeight / 2);
@@ -7,16 +10,37 @@ class Category extends StatelessWidget {
   final name;
   final ColorSwatch color;
   final IconData iconLocation;
+  final List<Unit> units;
 
   const Category(
       {Key key,
       @required this.name,
       @required this.color,
-      @required this.iconLocation})
+      @required this.iconLocation,
+      @required this.units})
       : assert(name != null),
         assert(color != null),
         assert(iconLocation != null),
+        assert(units != null),
         super(key: key);
+
+  void _navigateToConverter(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: Text(
+            name,
+            style: Theme.of(context).textTheme.display1,
+          ),
+          centerTitle: true,
+          backgroundColor: color,
+        ),
+        body: ConverterRoute(units: units, color: color),
+      );
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +52,7 @@ class Category extends StatelessWidget {
           borderRadius: _borderRadius,
           highlightColor: color,
           splashColor: color,
-          onTap: () {
-            print('I was Tapped!');
-          },
+          onTap: () => _navigateToConverter(context),
           child: Padding(
             padding: EdgeInsets.all(16.0),
             child: Row(
